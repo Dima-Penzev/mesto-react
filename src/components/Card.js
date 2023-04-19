@@ -1,4 +1,8 @@
-function Card({ name, link, likes }) {
+function Card({ name, link, likes, onCardClick }) {
+  function handleClick() {
+    onCardClick({ name, link });
+  }
+
   return (
     <li className="card">
       <button
@@ -6,7 +10,12 @@ function Card({ name, link, likes }) {
         type="button"
         aria-label="удалить"
       ></button>
-      <img className="card__image" src={link} alt={name} />
+      <img
+        className="card__image"
+        src={link}
+        alt={name}
+        onClick={handleClick}
+      />
       <div className="card__wrap">
         <h2 className="card__text">{name}</h2>
         <div>

@@ -28,7 +28,6 @@ function Main(props) {
       api
         .getInitialCards()
         .then((response) => {
-          console.log(response);
           setCards(response);
         })
         .catch((err) => {
@@ -73,7 +72,13 @@ function Main(props) {
       <section>
         <ul className="cards-container">
           {cards.map(({ name, link, likes, _id }) => (
-            <Card name={name} link={link} likes={likes.length} key={_id} />
+            <Card
+              name={name}
+              link={link}
+              likes={likes.length}
+              key={_id}
+              onCardClick={props.onCardClick}
+            />
           ))}
         </ul>
       </section>

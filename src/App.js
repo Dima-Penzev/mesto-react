@@ -4,13 +4,24 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
 import PopupWithForm from "./components/PopupWithForm";
+import ImagePopup from "./components/ImagePopup";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
-  function closeAllPopups() {}
+  function closeAllPopups() {
+    setIsEditProfilePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setSelectedCard({});
+  }
+
+  function handleCardClick(card) {
+    setSelectedCard(card);
+  }
 
   return (
     <div className="root">
@@ -19,13 +30,14 @@ function App() {
         onEditProfile={setIsEditProfilePopupOpen}
         onAddPlace={setIsAddPlacePopupOpen}
         onEditAvatar={setIsEditAvatarPopupOpen}
+        onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm
         name="profile"
         title="Редактировать профиль"
         isOpen={isEditProfilePopupOpen}
-        onClose={setIsEditProfilePopupOpen}
+        onClose={closeAllPopups}
       >
         <form
           className="popup__form"
@@ -68,7 +80,7 @@ function App() {
         name="card-editor"
         title="Новое место"
         isOpen={isAddPlacePopupOpen}
-        onClose={setIsAddPlacePopupOpen}
+        onClose={closeAllPopups}
       >
         <form
           className="popup__form"
@@ -109,7 +121,7 @@ function App() {
         name="photo-editor"
         title="Обновить аватар"
         isOpen={isEditAvatarPopupOpen}
-        onClose={setIsEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       >
         <form
           className="popup__form"
@@ -138,6 +150,7 @@ function App() {
           Да
         </button>
       </PopupWithForm>
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );
 }
