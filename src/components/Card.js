@@ -1,6 +1,6 @@
-function Card({ name, link, _id }) {
+function Card({ name, link, likes }) {
   return (
-    <li className="card" id={_id}>
+    <li className="card">
       <button
         className="card__delete"
         type="button"
@@ -15,7 +15,7 @@ function Card({ name, link, _id }) {
             type="button"
             aria-label="нравится"
           ></button>
-          <p className="card__like-amount"></p>
+          <p className="card__like-amount">{likes}</p>
         </div>
       </div>
     </li>

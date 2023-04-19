@@ -10,6 +10,8 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
 
+  function closeAllPopups() {}
+
   return (
     <div className="root">
       <Header />
@@ -136,27 +138,6 @@ function App() {
           Да
         </button>
       </PopupWithForm>
-      {/* <template id="card">
-        <li className="card">
-          <button
-            className="card__delete"
-            type="button"
-            aria-label="удалить"
-          ></button>
-          <img className="card__image" src="#" alt="#" />
-          <div className="card__wrap">
-            <h2 className="card__text"></h2>
-            <div>
-              <button
-                className="card__like-btn"
-                type="button"
-                aria-label="нравится"
-              ></button>
-              <p className="card__like-amount"></p>
-            </div>
-          </div>
-        </li>
-      </template> */}
     </div>
   );
 }

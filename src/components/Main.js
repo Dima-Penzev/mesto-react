@@ -9,30 +9,33 @@ function Main(props) {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    // Promise.all([api.getUserInfo(), api.getInitialCards()])
-    //   .then(([{ name, about, _id, avatar }, cards]) => {
-    //     console.log({ name, about, avatar });
-    //     setUserName(name);
-    //     setUserDescription(about);
-    //     setUserAvatar(avatar);
-    //     console.log(cards);
-    //     // setCards(cards);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  });
+    api
+      .getUserInfo()
+      .then((user) => {
+        setUserName(user.name);
+        setUserDescription(user.about);
+        setUserAvatar(user.avatar);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [userName, userDescription, userAvatar]);
 
-  api
-    .getInitialCards()
-    .then((res) => {
-      console.log(res);
-
-      console.log(cards);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  useEffect(() => {
+    if (cards.length) {
+      return;
+    } else {
+      api
+        .getInitialCards()
+        .then((response) => {
+          console.log(response);
+          setCards(response);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [cards]);
 
   return (
     <main className="content root__content">
@@ -69,9 +72,9 @@ function Main(props) {
       </section>
       <section>
         <ul className="cards-container">
-          {/* {cards.forEach((card) => (
-            <Card card={card} />
-          ))} */}
+          {cards.map(({ name, link, likes, _id }) => (
+            <Card name={name} link={link} likes={likes.length} key={_id} />
+          ))}
         </ul>
       </section>
     </main>
