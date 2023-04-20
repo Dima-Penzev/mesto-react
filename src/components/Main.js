@@ -1,40 +1,28 @@
 import { useState, useEffect } from "react";
-import api from "../utils/Api";
+import api from "../utils/api";
 import Card from "./Card";
 
-function Main(props) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    api
-      .getUserInfo()
-      .then((user) => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then(([user, cardsResponse]) => {
         setUserName(user.name);
         setUserDescription(user.about);
         setUserAvatar(user.avatar);
+
+        if (!cards.length) {
+          setCards(cardsResponse);
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [userName, userDescription, userAvatar]);
-
-  useEffect(() => {
-    if (cards.length) {
-      return;
-    } else {
-      api
-        .getInitialCards()
-        .then((response) => {
-          setCards(response);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [cards]);
+  }, [userName, userDescription, userAvatar, cards]);
 
   return (
     <main className="content root__content">
@@ -49,7 +37,7 @@ function Main(props) {
             className="user__photo-edit"
             type="button"
             aria-label="заменить фото пользователя"
-            onClick={props.onEditAvatar}
+            onClick={onEditAvatar}
           ></button>
         </div>
         <div className="user__edit-wrap">
@@ -58,7 +46,7 @@ function Main(props) {
             className="user__edit"
             type="button"
             aria-label="редактировать"
-            onClick={props.onEditProfile}
+            onClick={onEditProfile}
           ></button>
         </div>
         <p className="user__activity">{userDescription}</p>
@@ -66,7 +54,7 @@ function Main(props) {
           className="user__add-card"
           type="button"
           aria-label="добавить"
-          onClick={props.onAddPlace}
+          onClick={onAddPlace}
         ></button>
       </section>
       <section>
@@ -77,7 +65,7 @@ function Main(props) {
               link={link}
               likes={likes.length}
               key={_id}
-              onCardClick={props.onCardClick}
+              onCardClick={onCardClick}
             />
           ))}
         </ul>
