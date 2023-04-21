@@ -36,15 +36,11 @@ function App() {
       <PopupWithForm
         name="profile"
         title="Редактировать профиль"
+        buttonText="Сохранить"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
-        <form
-          className="popup__form"
-          id="form-profile"
-          name="profile"
-          noValidate
-        >
+        <>
           <div className="popup__input-container">
             <input
               className="popup__input"
@@ -71,23 +67,16 @@ function App() {
             />
             <span className="popup__error activity-input-error"></span>
           </div>
-          <button className="popup__button" type="submit">
-            Сохранить
-          </button>
-        </form>
+        </>
       </PopupWithForm>
       <PopupWithForm
         name="card-editor"
         title="Новое место"
+        buttonText="Создать"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
-        <form
-          className="popup__form"
-          id="form-card-editor"
-          name="card-data"
-          noValidate
-        >
+        <>
           <div className="popup__input-container">
             <input
               className="popup__input"
@@ -112,44 +101,28 @@ function App() {
             />
             <span className="popup__error card-link-input-error"></span>
           </div>
-          <button className="popup__button" type="submit">
-            Создать
-          </button>
-        </form>
+        </>
       </PopupWithForm>
       <PopupWithForm
         name="photo-editor"
         title="Обновить аватар"
+        buttonText="Сохранить"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
-        <form
-          className="popup__form"
-          id="form-photo-editor"
-          name="photo-data"
-          noValidate
-        >
-          <div className="popup__input-container">
-            <input
-              className="popup__input"
-              id="photo-link-input"
-              type="url"
-              name="link"
-              placeholder="Ссылка на фото"
-              required
-            />
-            <span className="popup__error photo-link-input-error"></span>
-          </div>
-          <button className="popup__button" type="submit">
-            Сохранить
-          </button>
-        </form>
+        <div className="popup__input-container">
+          <input
+            className="popup__input"
+            id="photo-link-input"
+            type="url"
+            name="link"
+            placeholder="Ссылка на фото"
+            required
+          />
+          <span className="popup__error photo-link-input-error"></span>
+        </div>
       </PopupWithForm>
-      <PopupWithForm name="confirm" title="Вы уверены?">
-        <button className="popup__button" type="submit">
-          Да
-        </button>
-      </PopupWithForm>
+      <PopupWithForm name="confirm" title="Вы уверены?" buttonText="Да" />
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>
   );

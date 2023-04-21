@@ -14,15 +14,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
         setUserName(user.name);
         setUserDescription(user.about);
         setUserAvatar(user.avatar);
-
-        if (!cards.length) {
-          setCards(cardsResponse);
-        }
+        setCards(cardsResponse);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [userName, userDescription, userAvatar, cards]);
+  }, []);
 
   return (
     <main className="content root__content">
@@ -38,7 +35,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
             type="button"
             aria-label="заменить фото пользователя"
             onClick={onEditAvatar}
-          ></button>
+          />
         </div>
         <div className="user__edit-wrap">
           <h1 className="user__name">{userName}</h1>
@@ -47,7 +44,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
             type="button"
             aria-label="редактировать"
             onClick={onEditProfile}
-          ></button>
+          />
         </div>
         <p className="user__activity">{userDescription}</p>
         <button
@@ -55,7 +52,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
           type="button"
           aria-label="добавить"
           onClick={onAddPlace}
-        ></button>
+        />
       </section>
       <section>
         <ul className="cards-container">
