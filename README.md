@@ -1,7 +1,22 @@
-# Место
+# Mesto
 
-Многие из нас любят путешествовать. При этом мы стараемся запечатлеть интересные и красивые места на наши смартфоны или иные девайсы. Благо, современные технологии позволяют нам это делать. Но также мы хотим делиться своими впечатлениями с другими людьми. Поэтому нами был создан проект "Место". Он преставляет собой сервис, который дает своим пользователям возможность загружать фото посещенных мест. Сервис позволяет создать профиль пользователя, а именно, указать имя, род деятельности и загрузить его фото. Далее в этом приложении пользователь может добавлять карточки с фотографиями и описание к ним. В свою очередь другие пользователи, зайдя в чей либо профиль, могут помечать понравившиеся фото, нажав на символ "сердце" в правом нижнем углу карточки.
+__About__
 
-В данном проекте позиционирование элементов в блоке, содержащем информацию о пользователе, и расположение карточек с фотографиями выполнялись при помощи технологии __Grid Layout.__
+Many of us like to travel. At the same time, we try to capture interesting and beautiful places on our smartphones or other devices. Fortunately, modern technologies allow us to do this. But we also want to share our impressions with other people. Therefore, we created the project "Mesto".
 
-__Ссылка на__ **[Место](https://dima-penzev.github.io/mesto/index.html)**
+__Functionality__
+
+This service gives its users the opportunity to upload photos of visited places. The service allows you to create a user profile, namely, specify the name, occupation and upload his photo. Also in this application, the user can add cards with photos and a description to them. In turn, other users can mark their favorite photos by clicking on the "heart" symbol in the lower right corner of the card.
+
+__Technologies used in the project:__
+
+- HTML
+- CSS
+- Grid layout
+- BEM
+- Adaptive design
+- JavaScript
+- REST API
+- React
+
+I am currently practicing my "React" usage skills in this project. The project has not been completed yet.
