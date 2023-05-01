@@ -5,6 +5,7 @@ import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import EditProfilePopup from "./EditProfilePopup";
+import EditAvatarPopup from "./EditAvatarPopup";
 import ImagePopup from "./ImagePopup";
 import { api } from "../utils/Api";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
@@ -49,7 +50,29 @@ function App() {
       });
   }
 
-  function handleUpdateUser() {}
+  function handleUpdateUser(data) {
+    api
+      .setUserInfo({ username: data.name, activity: data.about })
+      .then((response) => {
+        setCurrentUser(response);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleUpdateAvatar(data) {
+    api
+      .setUserPhoto(data.avatar)
+      .then((response) => {
+        setCurrentUser(response);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <div className="root">
@@ -67,6 +90,11 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+        />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatart={handleUpdateAvatar}
         />
         <PopupWithForm
           name="card-editor"
@@ -102,25 +130,7 @@ function App() {
             </div>
           </>
         </PopupWithForm>
-        <PopupWithForm
-          name="photo-editor"
-          title="Обновить аватар"
-          buttonText="Сохранить"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-        >
-          <div className="popup__input-container">
-            <input
-              className="popup__input"
-              id="photo-link-input"
-              type="url"
-              name="link"
-              placeholder="Ссылка на фото"
-              required
-            />
-            <span className="popup__error photo-link-input-error"></span>
-          </div>
-        </PopupWithForm>
+
         <PopupWithForm name="confirm" title="Вы уверены?" buttonText="Да" />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </CurrentUserContext.Provider>
