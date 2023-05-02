@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { api } from "../utils/Api";
+import { useContext } from "react";
 import Card from "./Card";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
@@ -9,20 +8,10 @@ function Main({
   onAddPlace,
   onCardClick,
   onCardLike,
+  onCardDelete,
+  cards,
 }) {
-  const [cards, setCards] = useState([]);
   const { name, about, avatar } = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((cardsResponse) => {
-        setCards(cardsResponse);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <main className="content root__content">
@@ -65,7 +54,7 @@ function Main({
               key={_id}
               onCardClick={onCardClick}
               onCardLike={onCardLike}
-              setCards={setCards}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>

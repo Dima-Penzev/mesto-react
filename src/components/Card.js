@@ -9,7 +9,7 @@ function Card({
   cardId,
   onCardClick,
   onCardLike,
-  setCards,
+  onCardDelete,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const isOwn = ownerId === currentUser._id;
@@ -23,13 +23,22 @@ function Card({
   }
 
   function handleLikeClick() {
-    onCardLike(likes, cardId, setCards);
+    onCardLike(likes, cardId);
+  }
+
+  function handleDeleteClick() {
+    onCardDelete(cardId);
   }
 
   return (
     <li className="card">
       {isOwn && (
-        <button className="card__delete" type="button" aria-label="удалить" />
+        <button
+          className="card__delete"
+          type="button"
+          aria-label="удалить"
+          onClick={handleDeleteClick}
+        />
       )}
       <img
         className="card__image"

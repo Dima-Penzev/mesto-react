@@ -1,11 +1,14 @@
+import { useRef } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatart }) {
+  const avatarRef = useRef();
+
   function handleSubmit(e) {
     e.preventDefault();
 
     onUpdateAvatart({
-      avatar: document.getElementById("photo-link-input").value,
+      avatar: avatarRef.current.value,
     });
   }
 
@@ -26,6 +29,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatart }) {
           name="link"
           placeholder="Ссылка на фото"
           required
+          ref={avatarRef}
         />
         <span className="popup__error photo-link-input-error"></span>
       </div>
