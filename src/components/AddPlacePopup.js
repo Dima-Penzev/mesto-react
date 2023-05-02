@@ -8,6 +8,8 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({ name: cardName, link: cardLink });
+    setCardName("");
+    setCardLink("");
   }
 
   return (
@@ -29,6 +31,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           minLength="2"
           maxLength="30"
           required
+          value={cardName}
           onChange={(e) => {
             setCardName(e.target.value);
           }}
@@ -43,6 +46,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           name="link"
           placeholder="Ссылка на картинку"
           required
+          value={cardLink}
           onChange={(e) => {
             setCardLink(e.target.value);
           }}
