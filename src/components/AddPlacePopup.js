@@ -12,6 +12,14 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     setCardLink("");
   }
 
+  function handleChangeName(e) {
+    setCardName(e.target.value);
+  }
+
+  function handleChangeLink(e) {
+    setCardLink(e.target.value);
+  }
+
   return (
     <PopupWithForm
       name="card-editor"
@@ -32,9 +40,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           maxLength="30"
           required
           value={cardName}
-          onChange={(e) => {
-            setCardName(e.target.value);
-          }}
+          onChange={handleChangeName}
         />
         <span className="popup__error card-title-input-error"></span>
       </div>
@@ -47,9 +53,7 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
           placeholder="Ссылка на картинку"
           required
           value={cardLink}
-          onChange={(e) => {
-            setCardLink(e.target.value);
-          }}
+          onChange={handleChangeLink}
         />
         <span className="popup__error card-link-input-error"></span>
       </div>
