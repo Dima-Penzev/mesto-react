@@ -20,6 +20,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
   const [cards, setCards] = useState([]);
   const [cardId, setCardId] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -77,6 +78,8 @@ function App() {
   }
 
   function handleUpdateUser({ name, about }) {
+    setIsLoading(true);
+
     api
       .setUserInfo({ username: name, activity: about })
       .then((response) => {
@@ -85,10 +88,15 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function handleUpdateAvatar({ avatar }) {
+    setIsLoading(true);
+
     api
       .setUserPhoto(avatar)
       .then((response) => {
@@ -97,10 +105,15 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
   function handleAddPlaceSubmit(newCard) {
+    setIsLoading(true);
+
     api
       .addNewCard(newCard)
       .then((response) => {
@@ -109,6 +122,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }
 
@@ -130,16 +146,19 @@ function App() {
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
         />
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatart={handleUpdateAvatar}
+          isLoading={isLoading}
         />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          isLoading={isLoading}
         />
         <PopupWithForm
           name="confirm"

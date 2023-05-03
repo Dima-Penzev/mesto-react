@@ -1,16 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
+function AddPlacePopup({ isOpen, onClose, onAddPlace, isLoading }) {
   const [cardName, setCardName] = useState("");
   const [cardLink, setCardLink] = useState("");
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({ name: cardName, link: cardLink });
+  }
+
+  useEffect(() => {
     setCardName("");
     setCardLink("");
-  }
+  }, [isOpen]);
 
   function handleChangeName(e) {
     setCardName(e.target.value);
@@ -24,10 +27,11 @@ function AddPlacePopup({ isOpen, onClose, onAddPlace }) {
     <PopupWithForm
       name="card-editor"
       title="Новое место"
-      buttonText="Создать"
+      buttonText={isLoading ? "Сохранение..." : "Создать"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isLoading={isLoading}
     >
       <div className="popup__input-container">
         <input
